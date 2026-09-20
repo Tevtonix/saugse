@@ -41,7 +41,10 @@ def driver(request):
         drv = webdriver.Edge(options=opts)
     else:
         raise ValueError(f"Неизвестный браузер: {name}")
+
     drv.maximize_window()
+    # Критерий 1: неявное ожидание в ноль, чтобы не смешивалось с явным WebDriverWait
+    drv.implicitly_wait(0)
     yield drv
     drv.quit()
 
